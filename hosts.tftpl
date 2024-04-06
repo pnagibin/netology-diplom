@@ -1,0 +1,12 @@
+[kubernetes-masters]
+%{ for i in kubernetes_masters ~}
+${i["name"]}   ansible_host=${i["network_interface"]["0"]["ip_address"]}
+%{ endfor ~}
+
+[kubernetes-workers]
+%{ for i in kubernetes_workers ~}
+${i["name"]}   ansible_host=${i["network_interface"][0]["ip_address"]}
+%{ endfor ~}
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
