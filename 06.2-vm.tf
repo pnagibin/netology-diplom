@@ -105,12 +105,17 @@ resource "yandex_compute_instance" "ansible" {
       "sudo apt-add-repository ppa:ansible/ansible -y",
       "sudo apt update -y",
       "sudo apt install ansible -y",
-      "mkdir /home/nagibin/ansible"
+      "mkdir /home/nagibin/ansible",
+      "mkdir /home/nagibin/kubernetes"
     ]
   }
   provisioner "file" {
     source      = "${abspath(path.module)}/ansible/"
     destination = "/home/nagibin/ansible"
+  }
+    provisioner "file" {
+    source      = "${abspath(path.module)}/kubernetes/"
+    destination = "/home/nagibin/kubernetes"
   }
   provisioner "remote-exec" {
     inline = [
@@ -118,7 +123,9 @@ resource "yandex_compute_instance" "ansible" {
       "ansible -i /home/nagibin/ansible/hosts.cfg -u nagibin all -m ping -v",
       "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-prerequisites.yaml -v",
       "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-masters.yaml -v",
-      "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-workers.yaml -v"
+      "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-workers.yaml -v",
+      "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-monitoring.yaml -v",
+      "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-deployment.yaml -v"
     ]
   }
 }

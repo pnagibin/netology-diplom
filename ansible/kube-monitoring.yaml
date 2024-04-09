@@ -1,0 +1,33 @@
+- hosts: kubernetes-masters
+  #gather_facts: false
+  tasks:
+    - name: install git
+      become: yes
+      apt:
+        name: git
+        state: present
+        update_cache: true
+
+    - name: install jsonnet
+      become: yes
+      apt:
+        name: jsonnet
+        state: present
+
+    - name: clone kube-prometheus.git
+      ansible.builtin.git:
+        repo: https://github.com/prometheus-operator/kube-prometheus.git
+        dest: /home/nagibin/kube-prometheus
+        single_branch: yes
+        version: main
+
+    - name: kubectl create -f manifests/setup
+      shell: cd /home/nagibin/kube-prometheus && kubectl create -f manifests/setup
+
+    - name: Sleep for 15 seconds and continue with play
+      ansible.builtin.wait_for:
+        timeout: 15
+      delegate_to: localhost
+
+    - name: kubectl create -f manifests/
+      shell: cd /home/nagibin/kube-prometheus &&  kubectl create -f manifests/

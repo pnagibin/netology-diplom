@@ -30,6 +30,34 @@ resource "yandex_vpc_security_group" "nat-instance-sg" {
   }
 
   ingress {
+    protocol       = "TCP"
+    description    = "prometheus"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 9090
+  }
+
+  ingress {
+    protocol       = "TCP"
+    description    = "alertmanager"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 9093
+  }
+
+    ingress {
+    protocol       = "TCP"
+    description    = "grafana"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 3000
+  }
+
+    ingress {
+    protocol       = "TCP"
+    description    = "webserver"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 8888
+  }  
+
+  ingress {
     protocol       = "ICMP"
     description    = "ext-ping"
     v4_cidr_blocks = ["0.0.0.0/0"]

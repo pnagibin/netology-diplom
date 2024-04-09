@@ -1,0 +1,5 @@
+- hosts: kubernetes-masters
+  #gather_facts: false
+  tasks:
+    - name: kubectl create -f deployment.yaml
+      shell: cd /home/nagibin/kubernetes && kubectl create -f deployment.yaml
