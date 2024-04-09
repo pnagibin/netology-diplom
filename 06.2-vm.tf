@@ -105,18 +105,14 @@ resource "yandex_compute_instance" "ansible" {
       "sudo apt-add-repository ppa:ansible/ansible -y",
       "sudo apt update -y",
       "sudo apt install ansible -y",
-      "mkdir /home/nagibin/ansible",
-      "mkdir /home/nagibin/kubernetes"
+      "mkdir /home/nagibin/ansible"
     ]
   }
   provisioner "file" {
     source      = "${abspath(path.module)}/ansible/"
     destination = "/home/nagibin/ansible"
   }
-    provisioner "file" {
-    source      = "${abspath(path.module)}/kubernetes/"
-    destination = "/home/nagibin/kubernetes"
-  }
+ 
   provisioner "remote-exec" {
     inline = [
       "export ANSIBLE_HOST_KEY_CHECKING=False",
