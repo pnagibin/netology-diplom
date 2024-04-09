@@ -1,3 +1,4 @@
 .terraform*
 terraform*
-personal.auto.tfvars
+*personal.auto.tfvars
+04.1-personal.auto.tfvars
