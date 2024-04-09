@@ -1,4 +1,4 @@
-.terraform*
-terraform*
-*personal.auto.tfvars
-04.1-personal.auto.tfvars
+.terraform
+*.hcl
+*.tfstate*
+.gitignore
