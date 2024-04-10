@@ -60,13 +60,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: webserver-entrypoint
+  name: public-webserver
   namespace: default
 spec:
   type: NodePort
   selector:
     bb: web
-  ports:
+  ports:      
+  - name: web
     port: 80
-    targetPort: 80
+    protocol: TCP
+    targetPort: web
     nodePort: 30010
