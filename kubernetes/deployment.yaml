@@ -7,11 +7,15 @@ spec:
    replicas: 3
    selector:
       matchLabels:
-         bb: web
+         app.kubernetes.io/component: webserver
+         app.kubernetes.io/name: webserver
+         app.kubernetes.io/part-of: kwebserver
    template:
       metadata:
          labels:
-            bb: web
+            app.kubernetes.io/component: webserver
+            app.kubernetes.io/name: webserver
+            app.kubernetes.io/part-of: kwebserver
       spec:
          containers:
             - name: webserver
@@ -26,7 +30,9 @@ metadata:
 spec:
   type: NodePort
   selector:
-    bb: web
+    app.kubernetes.io/component: webserver
+    app.kubernetes.io/name: webserver
+    app.kubernetes.io/part-of: kwebserver
   ports:      
   - name: web
     port: 80
