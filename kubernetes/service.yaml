@@ -60,15 +60,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app.kubernetes.io/name: webserver
   name: public-webserver
   namespace: default
 spec:
-  type: NodePort
-  selector:
-    bb: web
-  ports:      
-  - name: web
+  ports:
+  - nodePort: 32637
     port: 80
     protocol: TCP
-    targetPort: web
-    nodePort: 30010
+    targetPort: 80
+  selector:
+    app.kubernetes.io/name: webserver
+  sessionAffinity: None
+  type: NodePort

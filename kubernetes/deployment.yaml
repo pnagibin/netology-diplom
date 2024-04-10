@@ -19,21 +19,3 @@ spec:
             - name: webserver
               image: ghcr.io/pnagibin/webserver:latest
               imagePullPolicy: IfNotPresent
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: public-webserver
-  namespace: default
-  labels:
-      app.kubernetes.io/name: webserver
-spec:
-  type: NodePort
-  selector:
-    app.kubernetes.io/name: webserver
-  ports:      
-  - name: web
-    port: 80
-    protocol: TCP
-    targetPort: web
-    nodePort: 30010
