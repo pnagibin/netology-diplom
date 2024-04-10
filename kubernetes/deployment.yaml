@@ -17,16 +17,3 @@ spec:
             - name: webserver
               image: ghcr.io/pnagibin/webserver:latest
               imagePullPolicy: IfNotPresent
----
-apiVersion: v1
-kind: Service
-metadata:
-   name: webserver-entrypoint
-   namespace: default
-spec:
-   type: ClusterIP
-   selector:
-      bb: web
-   ports:
-      - port: 8888
-        targetPort: 80
