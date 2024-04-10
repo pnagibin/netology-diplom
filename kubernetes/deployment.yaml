@@ -7,15 +7,11 @@ spec:
    replicas: 3
    selector:
       matchLabels:
-         app.kubernetes.io/component: webserver
          app.kubernetes.io/name: webserver
-         app.kubernetes.io/part-of: kwebserver
    template:
       metadata:
          labels:
-            app.kubernetes.io/component: webserver
             app.kubernetes.io/name: webserver
-            app.kubernetes.io/part-of: kwebserver
       spec:
          containers:
             - name: webserver
@@ -30,12 +26,10 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app.kubernetes.io/component: webserver
     app.kubernetes.io/name: webserver
-    app.kubernetes.io/part-of: kwebserver
   ports:      
-  - name: web
+  - name: web80
     port: 80
     protocol: TCP
-    targetPort: web
-    nodePort: 30010
+    targetPort: web80
+    nodePort: 30011
