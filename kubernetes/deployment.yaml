@@ -17,3 +17,19 @@ spec:
             - name: webserver
               image: ghcr.io/pnagibin/webserver:latest
               imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: public-webserver
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    bb: web
+  ports:      
+  - name: web
+    port: 80
+    protocol: TCP
+    targetPort: web
+    nodePort: 30010
