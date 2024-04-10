@@ -9,6 +9,8 @@ spec:
     app.kubernetes.io/name: grafana
     app.kubernetes.io/part-of: kube-prometheus
   ports:      
-    - port: 3000
-      targetPort: 3000
-      nodePort: 30007
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: http
+    nodePort: 30007
