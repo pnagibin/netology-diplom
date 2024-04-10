@@ -5,7 +5,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    name: grafana
+    app.kubernetes.io/name: grafana
   ports:      
     - port: 3000
       targetPort: 3000
