@@ -8,7 +8,7 @@
       apt:
         name: git
         state: present
-        update_cache: true
+        update_cache: yes
 
     - name: install jsonnet
       retries: 3
@@ -17,6 +17,7 @@
       apt:
         name: jsonnet
         state: present
+        update_cache: yes
 
     - name: clone kube-prometheus.git
       retries: 3
