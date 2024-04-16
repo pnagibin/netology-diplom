@@ -2,4 +2,6 @@
   #gather_facts: false
   tasks:
     - name: kubectl create -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/deployment.yaml
+      retries: 3
+      delay: 10
       shell: kubectl create -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/deployment.yaml
