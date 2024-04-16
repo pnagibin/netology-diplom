@@ -1,0 +1,5 @@
+- hosts: kubernetes-masters
+  #gather_facts: false
+  tasks:
+    - name: kubectl create -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/service.yaml
+      shell: kubectl create -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/service.yaml

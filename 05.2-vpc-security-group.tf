@@ -1,5 +1,5 @@
-resource "yandex_vpc_security_group" "nat-instance-sg" {
-  name       = var.sg_nat_name
+resource "yandex_vpc_security_group" "nat-gateway-sg" {
+  name       = "nat-gateway-sg"
   network_id = yandex_vpc_network.vpc-net-01.id
 
   egress {
@@ -17,45 +17,59 @@ resource "yandex_vpc_security_group" "nat-instance-sg" {
 
   ingress {
     protocol       = "TCP"
-    description    = "ext-http"
+    description    = "webserver-ext"
     v4_cidr_blocks = ["0.0.0.0/0"]
     port           = 80
   }
 
   ingress {
     protocol       = "TCP"
-    description    = "ext-https"
+    description    = "webserver-int"
     v4_cidr_blocks = ["0.0.0.0/0"]
-    port           = 443
-  }
+    port           = 30010
+  } 
 
   ingress {
     protocol       = "TCP"
-    description    = "prometheus"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    port           = 9090
-  }
-
-  ingress {
-    protocol       = "TCP"
-    description    = "alertmanager"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    port           = 9093
-  }
-
-    ingress {
-    protocol       = "TCP"
-    description    = "grafana"
+    description    = "grafana-ext"
     v4_cidr_blocks = ["0.0.0.0/0"]
     port           = 3000
   }
 
     ingress {
     protocol       = "TCP"
-    description    = "webserver"
+    description    = "grafana-int"
     v4_cidr_blocks = ["0.0.0.0/0"]
-    port           = 8888
-  }  
+    port           = 30007
+  }
+
+  ingress {
+    protocol       = "TCP"
+    description    = "prometheus-ext"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 9090
+  }
+
+  ingress {
+    protocol       = "TCP"
+    description    = "prometheus-int"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 30008
+  }
+
+  ingress {
+    protocol       = "TCP"
+    description    = "alertmanager-ext"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 9093
+  }
+
+  ingress {
+    protocol       = "TCP"
+    description    = "alertmanager-int"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 30009
+  }
 
   ingress {
     protocol       = "ICMP"

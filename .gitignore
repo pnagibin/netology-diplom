@@ -3,3 +3,5 @@
 *.tfstate*
 .gitignore
 *.auto.tfvars
+04.1-personal.auto.tfvars
+ansible/hosts.cfg

@@ -22,9 +22,9 @@ resource "yandex_compute_instance" "kubernetes-masters" {
     preemptible = true
   }
   network_interface {
-    subnet_id = "${yandex_vpc_subnet.ru-central1-a.id}"
+    subnet_id = "${yandex_vpc_subnet.ru-central1-b.id}"
     nat       = false
-    security_group_ids = [yandex_vpc_security_group.nat-instance-sg.id]
+    security_group_ids = [yandex_vpc_security_group.nat-gateway-sg.id]
   }
 
   metadata = {
@@ -53,9 +53,9 @@ resource "yandex_compute_instance" "kubernetes-workers" {
     preemptible = true
   }
   network_interface {
-    subnet_id = "${yandex_vpc_subnet.ru-central1-a.id}"
+    subnet_id = "${yandex_vpc_subnet.ru-central1-b.id}"
     nat       = false
-    security_group_ids = [yandex_vpc_security_group.nat-instance-sg.id]
+    security_group_ids = [yandex_vpc_security_group.nat-gateway-sg.id]
   }
 
   metadata = {
@@ -85,9 +85,9 @@ resource "yandex_compute_instance" "ansible" {
     preemptible = true
   }
   network_interface {
-    subnet_id = "${yandex_vpc_subnet.ru-central1-a.id}"
+    subnet_id = "${yandex_vpc_subnet.ru-central1-b.id}"
     nat       = true
-    security_group_ids = [yandex_vpc_security_group.nat-instance-sg.id]
+    security_group_ids = [yandex_vpc_security_group.nat-gateway-sg.id]
   }
 
   metadata = {
@@ -121,7 +121,8 @@ resource "yandex_compute_instance" "ansible" {
       "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-masters.yaml -v",
       "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-workers.yaml -v",
       "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-monitoring.yaml -v",
-      "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-deployment.yaml -v"
+      "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-deployment.yaml -v",
+      "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-service.yaml -v"
     ]
   }
 }

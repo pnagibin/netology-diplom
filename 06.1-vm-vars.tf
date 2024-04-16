@@ -15,7 +15,7 @@ variable "vm_kube_masters" {
       ram   = 2
       core_fraction = 5
       platform_id   = "standard-v1"
-      zone          = "ru-central1-a"
+      zone          = "ru-central1-b"
     },
   ]
 }
@@ -37,7 +37,7 @@ variable "vm_kube_workers" {
       ram   = 2
       core_fraction = 5
       platform_id   = "standard-v1"
-      zone          = "ru-central1-a"
+      zone          = "ru-central1-b"
     },
     {
      vm_name = "kube-worker-02"
@@ -45,7 +45,7 @@ variable "vm_kube_workers" {
       ram   = 2
       core_fraction = 5
       platform_id   = "standard-v1"
-      zone          = "ru-central1-a"
+      zone          = "ru-central1-b"
     },
     {
      vm_name = "kube-worker-03"
@@ -53,7 +53,7 @@ variable "vm_kube_workers" {
       ram   = 2
       core_fraction = 5
       platform_id   = "standard-v1"
-      zone          = "ru-central1-a"
+      zone          = "ru-central1-b"
     }
   ]
 }
@@ -75,7 +75,7 @@ variable "vm_ansible" {
       ram   = 2
       core_fraction = 5
       platform_id   = "standard-v1"
-      zone          = "ru-central1-a"
+      zone          = "ru-central1-b"
     },
   ]
 }
