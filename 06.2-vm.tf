@@ -122,7 +122,8 @@ resource "yandex_compute_instance" "ansible" {
       "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-workers.yaml -v",
       "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-monitoring.yaml -v",
       "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-deployment.yaml -v",
-      "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-service.yaml -v"
+      "ansible-playbook -i /home/nagibin/ansible/hosts.cfg -u nagibin ./ansible/kube-service.yaml -v",
+      "ansible-playbook --connection=local ./ansible/kube-github-install-self-hosted-runner.yaml -v"
     ]
   }
 }

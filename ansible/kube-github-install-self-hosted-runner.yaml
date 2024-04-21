@@ -1,0 +1,14 @@
+- hosts: 127.0.0.1
+  connection: local
+  become: yes
+  #gather_facts: false
+  tasks:
+    - name: Install GitHub self-hosted runner
+      retries: 3
+      delay: 10
+      shell: |
+        mkdir actions-runner && cd actions-runner
+        curl -o actions-runner-linux-x64-2.315.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.315.0/actions-runner-linux-x64-2.315.0.tar.gz
+        tar xzf ./actions-runner-linux-x64-2.315.0.tar.gz
+        ./config.sh --url https://github.com/pnagibin/diplom-docker --token ANXOTK2XODBH2ZGDK6HDFSDGET2H4
+        ./run.sh
