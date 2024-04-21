@@ -1,0 +1,1 @@
+ansible-playbook --connection=local ./ansible/kube-github-install-self-hosted-runner.yaml -v

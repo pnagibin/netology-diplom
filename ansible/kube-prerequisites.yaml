@@ -10,6 +10,7 @@
       delay: 10
       apt:
         update_cache: yes
+        cache_valid_time: 86400
 
     - name: reboot and wait for reboot to complete
       retries: 3
