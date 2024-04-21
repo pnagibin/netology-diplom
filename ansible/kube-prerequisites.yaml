@@ -152,7 +152,6 @@
       apt:
         name: kubelet
         state: present
-        update_cache: true
 
     - name: install Kubeadm
       retries: 3
