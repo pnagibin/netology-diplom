@@ -3,14 +3,15 @@
   tasks:
     - name: install Kubectl
       retries: 3
-      delay: 10
+      delay: 20
       apt:
         name: kubectl
         state: present
         force: yes # allow downgrades
+        update_cache: no
     - name: create an empty file for Kubeadm configuring
       retries: 3
-      delay: 10
+      delay: 20
       copy:
         content: ""
         dest: /etc/kubernetes/kubeadm-config.yaml
@@ -18,7 +19,7 @@
 
     - name: configuring the container runtime including its cgroup driver
       retries: 3
-      delay: 10
+      delay: 20
       blockinfile:
         path: /etc/kubernetes/kubeadm-config.yaml
         block: |
@@ -42,7 +43,7 @@
 
     - name: initialize the cluster (this could take some time)
       retries: 3
-      delay: 10
+      delay: 20
       shell: kubeadm init --config /etc/kubernetes/kubeadm-config.yaml >> cluster_initialized.log
       args:
         chdir: /home/nagibin
@@ -50,7 +51,7 @@
 
     - name: create .kube directory
       retries: 3
-      delay: 10
+      delay: 20
       become: yes
       become_user: nagibin
       file:
@@ -60,7 +61,7 @@
 
     - name: copy admin.conf to user's kube config
       retries: 3
-      delay: 10
+      delay: 20
       copy:
         src: /etc/kubernetes/admin.conf
         dest: /home/nagibin/.kube/config
@@ -69,7 +70,7 @@
 
     - name: install Pod network
       retries: 3
-      delay: 10
+      delay: 20
       become: yes
       become_user: nagibin
       shell: kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml >> pod_network_setup.log

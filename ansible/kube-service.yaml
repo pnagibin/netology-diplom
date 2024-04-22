@@ -3,5 +3,5 @@
   tasks:
     - name: kubectl create -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/service.yaml
       retries: 3
-      delay: 10
+      delay: 20
       shell: kubectl create -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/service.yaml

@@ -3,23 +3,25 @@
   tasks:
     - name: install git
       retries: 3
-      delay: 10
+      delay: 20
       become: yes
       apt:
         name: git
         state: present
+        update_cache: no
 
     - name: install jsonnet
       retries: 3
-      delay: 10
+      delay: 20
       become: yes
       apt:
         name: jsonnet
         state: present
+        update_cache: no
 
     - name: clone kube-prometheus.git
       retries: 3
-      delay: 10
+      delay: 20
       ansible.builtin.git:
         repo: https://github.com/prometheus-operator/kube-prometheus.git
         dest: /home/nagibin/kube-prometheus
@@ -28,17 +30,17 @@
 
     - name: kubectl create -f manifests/setup
       retries: 3
-      delay: 10
+      delay: 20
       shell: cd /home/nagibin/kube-prometheus && kubectl create -f manifests/setup
 
     - name: Sleep for 15 seconds and continue with play
       retries: 3
-      delay: 10
+      delay: 20
       ansible.builtin.wait_for:
         timeout: 15
       delegate_to: localhost
 
     - name: kubectl create -f manifests/
       retries: 3
-      delay: 10
+      delay: 20
       shell: cd /home/nagibin/kube-prometheus &&  kubectl create -f manifests/

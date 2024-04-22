@@ -3,9 +3,9 @@
   tasks:
     - name: kubectl delete -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/deployment.yaml
       retries: 3
-      delay: 10
+      delay: 20
       shell: kubectl delete -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/deployment.yaml
     - name: kubectl create -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/deployment.yaml
       retries: 3
-      delay: 10
+      delay: 20
       shell: kubectl create -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/deployment.yaml
