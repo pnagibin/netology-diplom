@@ -17,5 +17,5 @@ spec:
       spec:
          containers:
             - name: webserver
-              image: ghcr.io/pnagibin/webserver:${{ github.ref_name }}
+              image: ghcr.io/pnagibin/webserver:latest
               imagePullPolicy: Always

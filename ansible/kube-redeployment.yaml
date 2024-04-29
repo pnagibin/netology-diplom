@@ -1,7 +1,41 @@
 - hosts: kubernetes-masters
   #gather_facts: false
   tasks:
-    - name: kubectl apply -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/deployment.yaml
+    - name: create an empty file for Kubeadm configuring
       retries: 3
       delay: 20
-      shell: kubectl apply -f https://raw.githubusercontent.com/pnagibin/netology-diplom/master/kubernetes/deployment.yaml
+      copy:
+        content: ""
+        dest: /home/nagibin/ansible/redeployment.yaml
+        force: no
+    - name: create redeployment manifest
+      retries: 3
+      delay: 20    
+      ansible.builtin.blockinfile:
+        path: /home/nagibin/ansible/redeployment.yaml
+        block: |
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: webserver
+            namespace: default
+            labels:
+                app.kubernetes.io/name: webserver
+          spec:
+            replicas: 3
+            selector:
+                matchLabels:
+                  app.kubernetes.io/name: webserver
+            template:
+                metadata:
+                  labels:
+                      app.kubernetes.io/name: webserver
+                spec:
+                  containers:
+                      - name: webserver
+                        image: ghcr.io/pnagibin/webserver:"{{ tag }}"
+                        imagePullPolicy: Always
+    - name: kubectl apply -f /home/nagibin/ansible/redeployment.yaml
+      retries: 3
+      delay: 20
+      shell: kubectl apply -f /home/nagibin/ansible/redeployment.yaml
