@@ -17,5 +17,5 @@ spec:
       spec:
          containers:
             - name: webserver
-              image: ghcr.io/pnagibin/webserver:latest
+              image: ghcr.io/pnagibin/webserver:v1.0.2
               imagePullPolicy: Always
